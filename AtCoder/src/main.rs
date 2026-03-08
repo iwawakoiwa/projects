@@ -2,13 +2,12 @@ use proconio::input;
 
 fn main(){
     input!{
-        a:i64,
-        b:i64,
+        a:i16,
+        b:i16,
     }
-    let ab = a*b%2;
-    if ab == 0{
-        println!("Odd");
-    }else{
+    if a*b%2 == 0{
         println!("Even");
+    }else{
+        println!("Odd");
     }
 }

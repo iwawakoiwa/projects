@@ -1,29 +1,32 @@
-// use std::string;
+use std::io;
 
-fn main (){
-    let mut s = String::from("hello");
+fn main(){
+    let mut input_string = String::new();
+    io::stdin()
+        .read_line(&mut input_string)
+        .expect("失敗しました");
 
-    let s1= &s;
-    println!("{}",s1);
-    let s2 = calculate_length(&mut s);
-    println!("{}",s2);
-} 
-fn calculate_length(some_string: &mut String)-> &str {
-    some_string.push_str(", world");
-    some_string
-} 
+    let input_string = input_string.trim_end();
+    let mut index = 0;
+    let max_string = input_string.len();
 
+    loop{
+        let word;
+        (word, index) = words(&input_string, index);
+        println!("{}",word);
+        if index >= max_string {
+            break;
+        }
+        index +=1;
+    }
+}
 
-
-
-
-
-// let x = 5;
-// let y = x.clone();
-// println!("{} {}",x,y);
-//        let mut s = String::from("hello");
-//        s.push_str(", world");
-
-//     let mut s = String::from("Hello"); // ヒープに確保
-//     s.push_str(", Ubuntu!");          // 柔軟にサイズを拡張
-//     println!("{}", s);                // "Hello, Ubuntu!" と表示
+fn words(s:&str,n:usize)->(&str,usize){
+    let bytes = s.as_bytes();
+    for (i,&iter) in bytes.iter().enumerate().skip(n){
+        if iter ==b' '{
+            return (&s[n..i],i);
+        }
+    }
+    (&s[n..],s.len())
+}
