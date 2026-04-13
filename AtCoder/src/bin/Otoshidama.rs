@@ -3,25 +3,16 @@ use::proconio::input;
 fn main() {
     input!{
         n:i64,
-        mut y:u64,
+        y:i64,
     }
-    let mut ans : [i64;3] = [0,0,0];
-    let mut total = 0;
-    while total <= n{
-        if y%10000 == 0{
-            y -= 10000;
-            ans[0] += 1;
-        }else if y%5000 == 0{
-            y -= 5000;
-            ans[1] += 1;
-        }else if y%1000 == 0{
-            y -= 1000;
-            ans[2] +=1;
-        }else {
-            
+    for i in 0..=n {
+        for j in 0..=n - i {
+            let k = (y - (i*10000 + j*5000))/1000;
+                if i + j + k == n{
+                    println!("{i} {j} {k}");
+                    return;
+            }
         }
-        total +=1;
-        println!("{}",y)
     }
-    println!("{:?}",ans);
+    println!("-1 -1 -1");    
 }

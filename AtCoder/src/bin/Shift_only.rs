@@ -5,12 +5,14 @@ fn main() {
     n: usize,
     mut a : [i32; n],
     }
-    let mut total = 0;
-    for i in 0..=n{
-        if a[i] % 2 == 1{
-            break;
-        }
-        total = i;
+    let mut t = 0;
+    loop {
+         if a.iter().all(|x| x % 2 == 0){
+                a.iter_mut().for_each(|x| *x /= 2);
+                t += 1;
+            }else {
+                println!("{t}");
+                return;
+            }
     }
-    println!("{}",total);
 }
